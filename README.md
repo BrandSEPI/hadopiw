@@ -1,4 +1,4 @@
-### VERSIONS
+# VERSIONS
 
 PHP 8.1.3
 JS V8 10.1.124.12
@@ -12,16 +12,25 @@ vuex: 4.0.2
 
 ## Back
 
+```
 cd back_hadopiw
 composer update
+```
 
-if necessary use (this command will delete and recreate a new database with migrations files):
+#### if necessary use (this command will delete and recreate a new database with migrations files):
+
+```
 php artisan migrate:fresh
+```
 
-# RUN SERVE
+### RUN SERVE
 
+```
 php artisan serve
+```
 
 ## front
 
+```
 npm
+```
