@@ -6,7 +6,7 @@ use App\Http\Controllers\API\ItemController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\RessourceController;
 use App\Http\Controllers\API\ItemHistoriesController;
-use App\Http\Controllers\API\RessourceHistoryController;
+use App\Http\Controllers\API\RessourceHistoriesController;
 
 
 /*
@@ -46,8 +46,9 @@ use App\Http\Controllers\API\RessourceHistoryController;
 Route::apiResource("items", ItemController::class);
 Route::apiResource("itemHistory", ItemHistoriesController::class);
 Route::apiResource("ressources", RessourceController::class);
-Route::apiResource("ressourceHistory", RessourceHistoryController::class);
+Route::apiResource("ressourceHistory", RessourceHistoriesController::class);
 Route::apiResource("users", UserController::class);
 Route::post('login', [UserController::class, 'login']);
 Route::post('logout', [UserController::class, 'logout']);
 Route::get('me', [UserController::class, 'me']);
+Route::get('display', [RessourceController::class, 'show']);

@@ -17,6 +17,8 @@ cd back_hadopiw
 composer update
 ```
 
+###### composer install
+
 #### if necessary use (this command will delete and recreate a new database with migrations files):
 
 ```

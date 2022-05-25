@@ -52,8 +52,10 @@ class RessourceController extends Controller
      * @param  \App\Models\Ressource  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Ressource $ressource)
+    public function show(Request $request)
     {
+        $ressourceId = $request->header()["ressource-id"][0];
+        $ressource = Ressource::where('ressource_id', $ressourceId)->get();
         return response()->json($ressource);
     }
 

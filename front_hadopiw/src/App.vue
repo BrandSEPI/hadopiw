@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar">
         <router-link to="/"><img class="navLogo" src="./assets/hadopiw.png" alt="HadopiwLogo"></router-link>
-        <router-link to="/tabs"><img class="navItem" src="./assets/kamas.png" alt="TabLogo"></router-link>
-        <router-link to="/connect"><img class="navItem right" src="./assets/kamas.png" alt="TabLogo"></router-link>
+        <router-link to="/kamasChoice" ><img class="navItem" src="./assets/kamas.png" alt="TabLogo"></router-link>
+        <router-link to="/connect" class="right"><img class="navItem right" src="./assets/kamas.png" alt="TabLogo"></router-link>
   </nav>
 
   <router-view/>
@@ -18,6 +18,9 @@ export default {
 </script>
 
 <style>
+body{
+  background-color: rgb(49, 49, 49);
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -33,16 +36,17 @@ export default {
   display: flex;
   background-color: rgb(26, 26, 27);
   align-items: center;
-
 }
 .navLogo{
   width: 50px;
-  border-radius: 30px;
+  border-radius: 12px;
   border: solid 3px rgba(5, 5, 5, 0.342)}
 .navItem{
+  margin: 0 30px;
   width: 35px;
 }
 .right{
-  margin-right: auto;
+  margin-left: auto;
 }
+
 </style>

@@ -1,4 +1,5 @@
-<template>
+<template class="background">
+  <!-- test -->
 
 </template>
 
@@ -13,5 +14,7 @@ export default {
 
 
 <style scoped>
-
+.background{
+    background-color: black;
+}
 </style>
