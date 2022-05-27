@@ -37,6 +37,7 @@ export default {
     name: "ItemCalculator",
     components: { ItemInfoCompo,recipeCompo,statsCompo },
     data(){
+        // this.$store.commit("clearUpdateRessource")
         let items = this.$store.getters.getAllItems
         console.log(items);
         return {items,

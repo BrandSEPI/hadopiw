@@ -109,9 +109,29 @@ const store = createStore({
     selectRessource(state, ressource) {
       state.selected_ressource = ressource;
     },
-    pushUpdateRessource(state, json) {
-      console.log(json[0]);
-      state.update_ressource.push(json[0]);
+    pushUpdateRessource(state, res) {
+      let name = res.name;
+      console.log(res.name);
+      if (res.update != undefined) {
+        let str = res.update.created_at.split("T");
+        let hour = str[1].split(".")[0];
+        res.update.created_at = `${str[0]} - ${hour}`;
+      }
+
+      state.update_ressource[name] = res.update;
+      console.log(state.update_ressource);
+    },
+    clearItems(state) {
+      state.items = null;
+    },
+    clearSelectItem(state) {
+      state.SelectItem = null;
+    },
+    clearSelectRessource(state) {
+      state.selectRessource = null;
+    },
+    clearUpdateRessource(state) {
+      state.update_ressource = [];
     },
   },
 
@@ -150,9 +170,11 @@ const store = createStore({
         .then((result) => commit("selectItem", result))
         .catch((error) => console.log("error", error));
     },
-    update_ressource({ commit }, res_id) {
+
+    getUpdate_ressource({ commit }, res) {
       var myHeaders = new Headers();
-      myHeaders.append("ressource_id", res_id);
+      console.log(res.ankamaId);
+      myHeaders.append("ressource_id", res.ankamaId);
       var requestOptions = {
         method: "GET",
         headers: myHeaders,
@@ -161,7 +183,39 @@ const store = createStore({
 
       fetch(api + "ressources/display", requestOptions)
         .then((response) => response.json())
-        .then((result) => commit("pushUpdateRessource", result))
+        .then((result) => {
+          console.log(result);
+          let resourceResult = { name: res.name, update: result[0] };
+          console.log(resourceResult);
+          commit("pushUpdateRessource", resourceResult);
+          return resourceResult;
+        })
+        .catch((error) => console.log("error", error));
+    },
+    postUpdate_ressource({ commit }, res) {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+      var urlencoded = new URLSearchParams();
+      urlencoded.append("ressource_id", res.ressource_id);
+      urlencoded.append("price", res.price);
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: urlencoded,
+        redirect: "follow",
+      };
+
+      fetch(api + "ressources", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          // console.log(result);
+          let resourceResult = { name: res.name, update: result[0] };
+          console.log(resourceResult);
+          commit("pushUpdateRessource", resourceResult);
+          return resourceResult;
+        })
         .catch((error) => console.log("error", error));
     },
   },
