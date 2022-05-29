@@ -1,6 +1,6 @@
 <template>
     <input class="searchBar" type="text" placeholder="Ex: amulette du granduk">
-    <button @click="research">search</button>
+    <button class ="searchBtn" @click="research">search</button>
    <div class="information" v-if="this.selected!=null">
         <div class="infoTop">
             <h2>{{this.selected.name}}</h2>
@@ -92,13 +92,22 @@ export default {
     width: 80%;
     margin: 20px auto;
     height: 50px;
-    border-radius:15px;
+    border: none;
+    border-radius:15px 0px 0px 15px;
     background-color: rgba(146, 146, 146, 0.63);
     color: rgb(41, 41, 41);
     font-size: 1.5em;
   }
 .searchBar::placeholder {
   color: rgb(58, 58, 58);
+}
+.searchBtn{
+     background: linear-gradient(90deg, rgba(146, 146, 146, 0.63) 0%, rgba(41, 41, 41, 0) 50%);
+    height: 54px;
+    border-radius:0px 15px 15px 0px;
+    border: none;
+    color: rgb(240, 240, 240);
+    font-size: 1.5em;
 }
 
 .infoTop{
@@ -164,4 +173,18 @@ export default {
     padding: 2px
 }
 
+
+
+
+
+
+
+/* Animations */
+
+.searchBtn:hover{
+    background: rgba(146, 146, 146, 0.63);
+    /* background: linear-gradient(90deg, rgba(146, 146, 146, 0.63) 0%, rgba(41, 41, 41, 0) 50%); */
+    color: rgb(41, 41, 41);
+    /* color: rgb(41, 41, 41); */
+}
 </style>

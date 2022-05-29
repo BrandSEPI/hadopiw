@@ -3,6 +3,8 @@ import homeView from "../views/homeView.vue";
 import choice from "../views/choiceView.vue";
 import itemCalculator from "../views/itemCalculatorView.vue";
 import ressourceCalculator from "../views/ressourceCalculatorView.vue";
+import SignInView from "../views/SignInView.vue";
+import SignUpView from "../views/SignUpView.vue";
 
 const routes = [
   {
@@ -24,6 +26,16 @@ const routes = [
     path: "/ressourceCalculator",
     name: "ressourceCalculator",
     component: ressourceCalculator,
+  },
+  {
+    path: "/connect",
+    name: "SignInView",
+    component: SignInView,
+  },
+  {
+    path: "/createAccount",
+    name: "SignUpView",
+    component: SignUpView,
   },
 ];
 

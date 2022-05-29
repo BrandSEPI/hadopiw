@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar">
         <router-link to="/"><img class="navLogo" src="./assets/hadopiw.png" alt="HadopiwLogo"></router-link>
-        <router-link to="/kamasChoice" ><img class="navItem" src="./assets/kamas.png" alt="TabLogo"></router-link>
-        <router-link to="/connect" class="right"><img class="navItem right" src="./assets/kamas.png" alt="TabLogo"></router-link>
+        <router-link to="/kamasChoice" ><img class="navItem" src="./assets/kamas.png" alt="Kamas"></router-link>
+        <router-link to="/connect" class="right"><img class="navItem right" src="./assets/user.png" alt="user"></router-link>
   </nav>
 
   <router-view/>
@@ -20,6 +20,7 @@ export default {
 <style>
 body{
   background-color: rgb(49, 49, 49);
+  animation: 0.2s;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

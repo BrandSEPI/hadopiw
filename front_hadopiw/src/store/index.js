@@ -211,7 +211,7 @@ const store = createStore({
         .then((response) => response.json())
         .then((result) => {
           // console.log(result);
-          let resourceResult = { name: res.name, update: result[0] };
+          let resourceResult = { name: res.name, update: result };
           console.log(resourceResult);
           commit("pushUpdateRessource", resourceResult);
           return resourceResult;

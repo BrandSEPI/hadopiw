@@ -1,14 +1,15 @@
 <template>
-{{this.$store.getters.getUpdateResource}}
     <div class="resource">
         <div  class="resourceFlex">
             <div class="name item">{{Object.keys(resource)[0]}}</div>
                  <div class="quantity item">x{{Object.values(resource)[0].quantity}}</div>
             </div >
             <template v-if="this.$store.getters.getUpdateResource[Object.keys(resource)[0]]">
-                <div class="update" v-if="!this.edit">
-                    <div class="price" @click="this.edit=Object.values(resource)[0].ankamaId"  >Price : {{this.$store.getters.getUpdateResource[Object.keys(resource)[0]].price}} k</div>
-                        <div class="infoDate">Last update : {{this.$store.getters.getUpdateResource[Object.keys(resource)[0]].created_at}}</div>
+                <div class="update toUpdate" v-if="!this.edit">
+                    <div class="upEdit"  @click="this.edit=Object.values(resource)[0].ankamaId">edit</div>
+                    <div class="upItem price"  >Price : {{this.$store.getters.getUpdateResource[Object.keys(resource)[0]].price}} k</div>
+                    <div class="upItem infoDate">Last update : {{this.$store.getters.getUpdateResource[Object.keys(resource)[0]].created_at}}</div>
+
                 </div>
                 <div class="update" v-if="this.edit==Object.values(resource)[0].ankamaId">
                     <input type="text" class="priceInput" placeholder="Price..">
@@ -82,6 +83,13 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+.upEdit{
+  display: none;
+  margin: auto;
+  font-size: 1.2em;
+  color: rgba(59, 59, 59, 0.959);
+}
+
 .resource{
   background-color: rgba(255, 255, 255, 0.068);
   margin: 15px 0px;
@@ -114,5 +122,18 @@ export default {
 .priceInput::placeholder {
   color: rgb(58, 58, 58);
 }
-/* amulette du granduk */
+/* animations */
+
+
+.toUpdate:hover{
+  background-color: rgba(146, 146, 146, 0.63);
+  border-radius: 12px;
+}
+.toUpdate:hover > .upItem{
+  color: rgba(0,0,0,0);
+}
+.toUpdate:hover > .upEdit{
+  display: block;
+  margin: auto;
+}
 </style>
