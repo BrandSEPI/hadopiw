@@ -72,16 +72,16 @@ export default {
       console.log("test");
     }
   },
-  mounted(){
+  // mounted(){
 
-      if(this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]]){
-        console.log("in");
-      this.$emit('updateRessource',{price : this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]].price, quantity:Object.values(this.resource)[0].quantity})
-    } else {
-      console.log("none");
-      this.$emit('updateRessource',undefined)
-    }
-  }
+  //     if(this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]]){
+  //       console.log("in");
+  //     this.$emit('updateRessource',{price : this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]].price, quantity:Object.values(this.resource)[0].quantity})
+  //   } else {
+  //     console.log("none");
+  //     this.$emit('updateRessource',undefined)
+  //   }
+  // }
   
 }
 </script>

@@ -1,17 +1,17 @@
 <template>
     <input class="searchBar" type="text" placeholder="Ex: amulette du granduk">
     <button class ="searchBtn" @click="research">search</button>
-   <div class="information" v-if="this.selected!=null">
+   <div class="information" v-if="this.$store.getters.getItem!=null">
         <div class="infoTop">
-            <h2>{{this.selected.name}}</h2>
+            <h2>{{this.$store.getters.getItem.name}}</h2>
             <!-- Er:403 -->
             <!-- <div><img :src="this.$store.state.selected_item.imgUrl" alt="" srcset=""></div> -->
         </div>
-        <ItemInfoCompo :item="this.selected.ankamaId"  :key="this.selected.ankamaId"/>
+        <ItemInfoCompo :item="this.$store.getters.getItem.ankamaId"  :key="this.$store.getters.getItem.ankamaId"/>
         <div class="itemBottom">
             <div class="item left">
                 <h3 class="collumnName">Recipe :</h3>
-            <recipeCompo :recipe="this.selected.recipe"/>
+            <recipeCompo :recipe="this.$store.getters.getItem.recipe"/>
             </div>
             <div class="bar"></div>
             <div class="item right">
@@ -23,7 +23,7 @@
                     <span>max</span>
                     </div>
                 </div>
-                <statsCompo :allStats="this.selected.statistics"/>
+                <statsCompo :allStats="this.$store.getters.getItem.statistics"/>
             </div>
         </div>
     </div>
@@ -39,41 +39,53 @@ export default {
     data(){
         // this.$store.commit("clearUpdateRessource")
         let items = this.$store.getters.getAllItems
+        // console.log(this.$store.getters.getItem);
         console.log(items);
         return {items,
         selected:null,
-        image:null,}
+        loading:null,}
     },
     methods: {
         research(){
             let value = document.querySelector(".searchBar").value.toLowerCase()
-            console.log(this.items);
+            // console.log(value);
+            // console.log(this.items);
             for (let i in this.items){
                 let name = this.items[i].name.toLowerCase()
                 // console.log(this.items[i].name);
                 if (value == name){
                     console.log("found");
-                    let promise = new Promise((resolve, reject) => {
-                        resolve(this.$store.dispatch("select_item",this.items[i]._id));
+                    this.$store.dispatch("select_item",this.items[i]._id).then(result=>{
+                        // console.log(result);
                     });
-                    // console.log(this.items[i]._id);
-                    promise.then(()=>{
-                        this.selected=this.$store.getters.getItem
-                        console.log(this.selected);
-                        return this.selected
-                    })
+                //     let promise = new Promise((resolve, reject) => {
+                //         console.log("promise launch");
+                //         resolve(this.$store.dispatch("select_item",this.items[i]._id));
+                //     });
+                //     // console.log(this.items[i]._id);
+                //     promise.then(result =>{
+                //         // this.load()
+                //         console.log(result);
+                //         // this.selected=this.$store.getters.getItem
+                //         // console.log(this.selected);
+                //         // return this.selected
+                //     })
                     
                 }
             }
             // console.log(value)
         },
-        
     },
     // mounted() {
     //     let items = this.$store.getters.getAllItems
     //     console.log(items);
     //     return {items}
     // },
+    // computed(){
+
+    //     this.select_item=this.$store.state.selected_item.then(console.log("changed"))
+    // },
+
 }
 </script>
 

@@ -57,6 +57,7 @@ const store = createStore({
     },
     selectItem(state, item) {
       state.selected_item = item;
+      console.log(state.selected_item);
     },
     addRessources(state, json) {
       state.ressources = json;
