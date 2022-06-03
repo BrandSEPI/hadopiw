@@ -7,7 +7,7 @@
             <!-- Er:403 -->
             <!-- <div><img :src="this.$store.state.selected_item.imgUrl" alt="" srcset=""></div> -->
         </div>
-        <ItemInfoCompo :price="'10000'" :coef="'95'" :infoDate="'10/12/2000'" />
+        <ItemInfoCompo :item="this.selected.ankamaId"  :key="this.selected.ankamaId"/>
         <div class="itemBottom">
             <div class="item left">
                 <h3 class="collumnName">Recipe :</h3>
@@ -41,7 +41,8 @@ export default {
         let items = this.$store.getters.getAllItems
         console.log(items);
         return {items,
-        selected:null}
+        selected:null,
+        image:null,}
     },
     methods: {
         research(){
@@ -65,7 +66,8 @@ export default {
                 }
             }
             // console.log(value)
-        }
+        },
+        
     },
     // mounted() {
     //     let items = this.$store.getters.getAllItems
@@ -93,7 +95,7 @@ export default {
     margin: 20px auto;
     height: 50px;
     border: none;
-    border-radius:15px 0px 0px 15px;
+    border-radius:3px;
     background-color: rgba(146, 146, 146, 0.63);
     color: rgb(41, 41, 41);
     font-size: 1.5em;
@@ -102,12 +104,13 @@ export default {
   color: rgb(58, 58, 58);
 }
 .searchBtn{
-     background: linear-gradient(90deg, rgba(146, 146, 146, 0.63) 0%, rgba(41, 41, 41, 0) 50%);
     height: 54px;
-    border-radius:0px 15px 15px 0px;
+    border-radius:3px;
     border: none;
-    color: rgb(240, 240, 240);
     font-size: 1.5em;
+    background: rgba(105, 105, 105, 0.63);
+    /* background: linear-gradient(90deg, rgba(146, 146, 146, 0.63) 0%, rgba(41, 41, 41, 0) 50%); */
+    color: rgb(41, 41, 41);
 }
 
 .infoTop{
@@ -126,12 +129,12 @@ export default {
     justify-content: space-between;
     color: white;
     font-size: 1.2em;
-    border-radius: 15px;
+    border-radius: 7px;
 }
 .itemBottom{
     margin: 50px 0 0 0;
     padding: 20px;
-    height: 60vh;
+    height: 100%;
     /* background-color: brown; */
     display: flex;
     justify-content: space-around;
@@ -145,11 +148,11 @@ export default {
 }
 
 .left{
-    border-radius: 15px 0 0 15px ;
+    border-radius: 5px 0 0 5px ;
 
 }
 .right{
-    border-radius: 0 15px 15px 0;
+    border-radius: 0 5px 5px 0;
 
 }
 .item{
@@ -182,9 +185,9 @@ export default {
 /* Animations */
 
 .searchBtn:hover{
-    background: rgba(146, 146, 146, 0.63);
+     background: rgba(146, 146, 146, 0.63);
     /* background: linear-gradient(90deg, rgba(146, 146, 146, 0.63) 0%, rgba(41, 41, 41, 0) 50%); */
-    color: rgb(41, 41, 41);
+    color: rgb(240, 240, 240);
     /* color: rgb(41, 41, 41); */
 }
 </style>

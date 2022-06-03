@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
 
+
 class UserController extends Controller
 {
     /**
@@ -92,6 +93,7 @@ class UserController extends Controller
         $user = User::where('email', $request['email'])->firstOrFail();
         if (Hash::check($request->password, $user->password)) {
             $token = $user->createToken('auth_token')->plainTextToken;
+            // $token = PersonalAccessToken::createToken();
         }
 
         return response()->json([
@@ -103,15 +105,15 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         // auth()->user()->tokens()->delete();
-        $token = PersonalAccessToken::where('token', $request['token']);
+        $token = PersonalAccessToken::where('tokenable_id', $request['user_id']);
         $token->delete();
         return response()->json("token deleted...");
     }
 
     public function me(Request $request)
     {
-        $user_id = PersonalAccessToken::where('token', $request->header()['token'][0])->firstorfail()["tokenable_id"];
-        $user = User::where("id", $user_id)->get();
+        // $user_id = PersonalAccessToken::where('token', $request->header()['token'][0])->firstorfail()["tokenable_id"];
+        $user = User::where("id", $request->header()['user-id'])->get();
         return $user;
     }
 }

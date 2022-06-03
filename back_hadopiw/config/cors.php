@@ -1,7 +1,7 @@
 <?php
 
+// header('Access-Control-Allow-Origin: *');
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration

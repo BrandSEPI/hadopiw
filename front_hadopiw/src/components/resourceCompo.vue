@@ -1,12 +1,13 @@
 <template>
     <div class="resource">
         <div  class="resourceFlex">
-            <div class="name item">{{Object.keys(resource)[0]}}</div>
+            <div @click="goToRessource" class="name item">{{Object.keys(resource)[0]}}</div>
                  <div class="quantity item">x{{Object.values(resource)[0].quantity}}</div>
             </div >
             <template v-if="this.$store.getters.getUpdateResource[Object.keys(resource)[0]]">
                 <div class="update toUpdate" v-if="!this.edit">
-                    <div class="upEdit"  @click="this.edit=Object.values(resource)[0].ankamaId">edit</div>
+                    <!-- <div class="upEdit"  @click="this.edit=Object.values(resource)[0].ankamaId">edit</div> -->
+                    <button @click="this.edit=Object.values(resource)[0].ankamaId" class="editBtn"><img class="imgEdit" src="../assets/edit.png" alt=""></button>
                     <div class="upItem price"  >Price : {{this.$store.getters.getUpdateResource[Object.keys(resource)[0]].price}} k</div>
                     <div class="upItem infoDate">Last update : {{this.$store.getters.getUpdateResource[Object.keys(resource)[0]].created_at}}</div>
 
@@ -46,9 +47,15 @@ export default {
     let res= {ankamaId:id,
     name:Object.keys(this.resource)[0]}
     this.$store.dispatch("getUpdate_ressource",res)
+    // if(this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]]){
+    //   this.$emit('updateRessource',{price : this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]].price, quantity:Object.values(this.resource)[0].quantity})
+    // } else {
+    //   this.$emit('updateRessource',undefined)
+    // }
+
     return{
       edit:false,
-    //   ressource:null,
+      ressourceList:this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]],
       update:null
     }
   },
@@ -60,10 +67,21 @@ export default {
         let result = {name:Object.keys(resource)[0],ressource_id:Object.values(resource)[0].ankamaId,price:priceInput}
         this.$store.dispatch("postUpdate_ressource",result)
         this.edit= false
+    },
+    goToRessource(){
+      console.log("test");
     }
   },
-  async mounted() {
-  },
+  mounted(){
+
+      if(this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]]){
+        console.log("in");
+      this.$emit('updateRessource',{price : this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]].price, quantity:Object.values(this.resource)[0].quantity})
+    } else {
+      console.log("none");
+      this.$emit('updateRessource',undefined)
+    }
+  }
   
 }
 </script>
@@ -93,12 +111,12 @@ export default {
 .resource{
   background-color: rgba(255, 255, 255, 0.068);
   margin: 15px 0px;
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 3px 15px;
 }
 .priceInput{
   outline: none;
-  border-radius: 12px;
+  border-radius: 3px;
   background-color: rgba(146, 146, 146, 0.63);
   color: rgb(41, 41, 41);
   border: none;
@@ -106,14 +124,22 @@ export default {
 }
 .btn{
   margin: 3px;
-  width: 2vw;
+  width: 20px;
   height: 25px;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 .valid{
   background-color: rgb(23, 138, 28);
+}
+.imgEdit{
+    width: 25px;
+}
+
+.editBtn{
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
 }
 .cancel{
   background-color: rgb(160, 20, 20);
@@ -124,16 +150,8 @@ export default {
 }
 /* animations */
 
+.imgEdit:hover{
+    filter: drop-shadow(0 0 0.5rem rgb(255, 255, 255));
+}
 
-.toUpdate:hover{
-  background-color: rgba(146, 146, 146, 0.63);
-  border-radius: 12px;
-}
-.toUpdate:hover > .upItem{
-  color: rgba(0,0,0,0);
-}
-.toUpdate:hover > .upEdit{
-  display: block;
-  margin: auto;
-}
 </style>

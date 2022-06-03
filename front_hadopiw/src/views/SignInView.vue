@@ -4,12 +4,12 @@
             <h2>Sign In</h2>
         </div>
         <div class="body">
-            <input placeholder="Login" type="text">
-            <input placeholder="Password" type="text">
+            <input id="mail" placeholder="Email" type="text">
+            <input id="pass" placeholder="Password" type="password">
             <a href="">Forgot your password ?</a>
         </div>
         <div class="foot">
-            <button class="btn" >Sign In</button>
+            <button class="btn" @click="submit()" >Sign In</button>
             <router-link to="/createAccount">Need an account ?</router-link>
         </div>
     </div>
@@ -19,8 +19,24 @@
 
 export default {
   name: 'SignInView',
-  
+  data(){
+  },
+  methods:{
+      async submit(){
+        let email = document.querySelector("#mail").value
+        let password = document.querySelector("#pass").value
+        let user = {"email":email,"password":password}
+        let res = await this.$store.dispatch("LoginUser",user)
+        console.log(await res);
+            //   if(res=="error"){
+            //       this.error="invalid form"
+            //   } else {
+            //       location.href="/connect"
+            //   }
+          }
+  }
 }
+
 </script>
 
 

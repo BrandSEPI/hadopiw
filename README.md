@@ -9,6 +9,7 @@
 - vue: 3.2.13,
 - vue-router: 4.0.15,
 - vuex: 4.0.2
+- js-cookie 3.0.1
 
 ## Back
 

@@ -54,8 +54,11 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show(Request $request)
     {
+
+        $itemId = $request->header()["item-id"][0];
+        $item = Item::where('item_id', $itemId)->get();
         return response()->json($item);
     }
 
