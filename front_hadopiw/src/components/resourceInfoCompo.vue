@@ -1,26 +1,23 @@
 <template>
-        <template v-if="this.$store.getters.getUpdateItem!=null">
+        <template v-if="this.$store.getters.getUpdateResource[item.name]!=undefined">
             <div class="itemInfo" v-if="!this.edit">
                 <button @click="this.edit=true" class="editBtn"><img class="imgEdit" src="../assets/edit.png" alt=""></button>
-            <div class="price">Price : {{this.$store.getters.getUpdateItem.price}} k</div>
-                <div class="coef">Coef : {{this.$store.getters.getUpdateItem.coef}}%</div>
-            <div class="infoDate">Last update : {{this.$store.getters.getUpdateItem.created_at}}</div>
+            <div class="price">Price : {{this.$store.getters.getUpdateResource[item.name].price}} k</div>
+            <div class="infoDate">Last update : {{this.$store.getters.getUpdateResource[item.name].created_at}}</div>
         </div>
             <div class="itemInfo" v-if="this.edit">
                     <input type="text" class="input price" placeholder="price...">
-                    <input type="text" class="input coef" placeholder="Coef : can be empty">
                     <button class="btn valid" @click="up_item()">✓</button>
                     <button class="btn cancel" @click="this.edit=false">X</button>
             </div>
         </template>
-        <div  v-if="this.$store.getters.getUpdateItem==null">
+        <div  v-if="this.$store.getters.getUpdateResource[item.name]==undefined">
         <div class=" itemInfo unknown" v-if="!this.edit">
                 Unknown, you can add the information by clique on this button -->
           <button class="btn valid addBtn" @click="this.edit=true">+</button>
         </div>
         <div class="itemInfo itemEdit" v-if="this.edit">
                     <input type="text" class="input price" placeholder="price...">
-                    <input type="text" class="input coef" placeholder="Coef : can be empty">
                     <button class="btn valid" @click="up_item()">✓</button>
                     <button class="btn cancel" @click="this.edit=false">X</button>
             </div>
@@ -28,20 +25,20 @@
 </template>
 
 <script>
-
+// [item.name].price
+// [item.name].created_at
 export default {
-  name: 'itemInfo',
+  name: 'ressourceInfo',
   props:{
-      item:Number,
+      item:Object,
       price:Number,
-      coef:Number,
       infoDate:Date,
   },
   data(){
-    this.$store.commit("clearUpdateItem")
-    console.log(this.item);
-    // console.log("test");
-      this.$store.dispatch("getUpdate_item",this.item)
+    this.$store.commit("clearUpdateRessource")
+    // console.log(this.item);
+    // console.log(this.$store.getters.getUpdateResource);
+      this.$store.dispatch("getUpdate_ressource",this.item)
       return{
           found:false,
           edit:false,
@@ -50,10 +47,9 @@ export default {
   methods: {
       up_item(){
         let priceInput = document.querySelector(".price").value
-        let coefInput = document.querySelector(".coef").value
         // console.log(priceInput);
-        let result = {item_id:this.item,price:priceInput,coef:coefInput}
-        this.$store.dispatch("postUpdate_item",result)
+        let result = {name:this.item.name,ressource_id:this.item.ankamaId,price:priceInput}
+        this.$store.dispatch("postUpdate_ressource",result)
         this.edit= false
       },
   },

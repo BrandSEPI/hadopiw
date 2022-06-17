@@ -7,7 +7,7 @@
             <template v-if="this.$store.getters.getUpdateResource[Object.keys(resource)[0]]">
                 <div class="update toUpdate" v-if="!this.edit">
                     <!-- <div class="upEdit"  @click="this.edit=Object.values(resource)[0].ankamaId">edit</div> -->
-                    <button @click="this.edit=Object.values(resource)[0].ankamaId" class="editBtn"><img class="imgEdit" src="../assets/edit.png" alt=""></button>
+                    <button @click="edit=Object.values(resource)[0].ankamaId" class="editBtn"><img class="imgEdit" src="../assets/edit.png" alt=""></button>
                     <div class="upItem price"  >Price : {{this.$store.getters.getUpdateResource[Object.keys(resource)[0]].price}} k</div>
                     <div class="upItem infoDate">Last update : {{this.$store.getters.getUpdateResource[Object.keys(resource)[0]].created_at}}</div>
 
@@ -16,14 +16,14 @@
                     <input type="text" class="priceInput" placeholder="Price..">
                     <div class="myBtn">
                         <button class="valid btn"  @click="up_resource(resource)">✓</button>
-                        <button class="cancel btn"  @click="this.edit= false">X</button>
+                        <button class="cancel btn"  @click="edit= false">X</button>
                     </div>
                 </div> 
             </template>
             <template v-if="this.$store.getters.getUpdateResource[Object.keys(resource)[0]]==undefined">
                 <div class="unknown" v-if="this.edit!=Object.values(resource)[0].ankamaId">
                     Unknown, you can add the information by clique on this button -->
-                    <button class="btn valid" @click="this.edit=Object.values(resource)[0].ankamaId">+</button>
+                    <button class="btn valid" @click="edit=Object.values(resource)[0].ankamaId">+</button>
                 </div>
                 <div class="update" v-if="this.edit==Object.values(resource)[0].ankamaId">
                     <input type="text" class="priceInput" placeholder="Price..">
@@ -43,10 +43,13 @@ export default {
       resource:Object,
   },
   data(){
+    // console.log(this.resource);
+    // console.log(this.$store.getters.getUpdateResource);
     let id = Object.values(this.resource)[0].ankamaId
     let res= {ankamaId:id,
     name:Object.keys(this.resource)[0]}
     this.$store.dispatch("getUpdate_ressource",res)
+    // this.$store.commit("totalMutation",this.$store.getters.getUpdateResource[Object.keys(resource)[0]].price);
     // if(this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]]){
     //   this.$emit('updateRessource',{price : this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]].price, quantity:Object.values(this.resource)[0].quantity})
     // } else {
@@ -72,16 +75,9 @@ export default {
       console.log("test");
     }
   },
-  // mounted(){
+  async mounted(){
 
-  //     if(this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]]){
-  //       console.log("in");
-  //     this.$emit('updateRessource',{price : this.$store.getters.getUpdateResource[Object.keys(this.resource)[0]].price, quantity:Object.values(this.resource)[0].quantity})
-  //   } else {
-  //     console.log("none");
-  //     this.$emit('updateRessource',undefined)
-  //   }
-  // }
+  }
   
 }
 </script>
@@ -107,7 +103,10 @@ export default {
   font-size: 1.2em;
   color: rgba(59, 59, 59, 0.959);
 }
-
+.toUpdate{
+  background-color: rgba(255, 255, 255, 0.068);
+  border-radius: 5px;
+}
 .resource{
   background-color: rgba(255, 255, 255, 0.068);
   margin: 15px 0px;
@@ -141,6 +140,7 @@ export default {
     background-color: rgba(0, 0, 0, 0);
     border: none;
 }
+
 .cancel{
   background-color: rgb(160, 20, 20);
   
@@ -152,6 +152,10 @@ export default {
 
 .imgEdit:hover{
     filter: drop-shadow(0 0 0.5rem rgb(255, 255, 255));
+}
+
+.btn:hover{
+  filter: brightness(1.2)
 }
 
 </style>

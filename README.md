@@ -5,11 +5,14 @@
 - node v14.18.1
 - Laravel Installer 1.5.0
 - Composer version 2.3.5
+- symfony/process v6.1.0
 
 - vue: 3.2.13,
 - vue-router: 4.0.15,
 - vuex: 4.0.2
 - js-cookie 3.0.1
+- chart.js 3.8.0
+- vue-chartjs 4.1.1
 
 ## Back
 

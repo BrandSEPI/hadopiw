@@ -7,6 +7,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\RessourceController;
 use App\Http\Controllers\API\ItemHistoriesController;
 use App\Http\Controllers\API\RessourceHistoriesController;
+use App\Http\Controllers\API\hadopythonController;
 
 
 /*
@@ -48,6 +49,7 @@ Route::apiResource("itemHistory", ItemHistoriesController::class);
 Route::apiResource("ressources", RessourceController::class);
 Route::apiResource("ressourceHistory", RessourceHistoriesController::class);
 Route::apiResource("users", UserController::class);
+Route::apiResource("hadoPython", hadopythonController::class);
 Route::post('login', [UserController::class, 'login']);
 Route::post('logout', [UserController::class, 'logout']);
 Route::get('me', [UserController::class, 'me']);

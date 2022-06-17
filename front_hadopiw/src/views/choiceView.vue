@@ -1,6 +1,6 @@
 <template>
 <div class="menu background">
-    <a class="link" @click="itemCalculator"><img class="linkImg" src="../assets/item.png" alt="itemImage"></a>
+    <a class="link" href="/itemCalculator"><img class="linkImg" src="../assets/item.png" alt="itemImage"></a>
     <a class="link" href="/ressourceCalculator"><img class="linkImg"  src="../assets/ressource.png" alt="RessourceImage"></a>
 </div>
 
@@ -11,9 +11,6 @@
 export default {
   name: 'choice',
   methods:{
-    itemCalculator(e){
-      this.$store.dispatch("getAllItems");
-    }
   }
 }
 

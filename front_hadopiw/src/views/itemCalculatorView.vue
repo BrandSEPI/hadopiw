@@ -26,6 +26,9 @@
                 <statsCompo :allStats="this.$store.getters.getItem.statistics"/>
             </div>
         </div>
+        <div class="graph">
+            <!-- <graphicCompo :data="this.$store.getters.getHistory"/> -->
+        </div>
     </div>
 </template>
 
@@ -33,20 +36,22 @@
 import ItemInfoCompo from '../components/itemInfoCompo.vue';
 import statsCompo from '../components/statsCompo.vue';
 import recipeCompo from '../components/recipeCompo.vue';
+// import graphicCompo from '../components/graphicCompo.ts';
 export default {
     name: "ItemCalculator",
     components: { ItemInfoCompo,recipeCompo,statsCompo },
     data(){
-        // this.$store.commit("clearUpdateRessource")
-        let items = this.$store.getters.getAllItems
+        
         // console.log(this.$store.getters.getItem);
-        console.log(items);
-        return {items,
+        // console.log(items);
+        return {items:null,
         selected:null,
         loading:null,}
     },
     methods: {
         research(){
+            this.$store.commit("clearUpdateRessource")
+            this.$store.commit("clearTotal")
             let value = document.querySelector(".searchBar").value.toLowerCase()
             // console.log(value);
             // console.log(this.items);
@@ -55,9 +60,7 @@ export default {
                 // console.log(this.items[i].name);
                 if (value == name){
                     console.log("found");
-                    this.$store.dispatch("select_item",this.items[i]._id).then(result=>{
-                        // console.log(result);
-                    });
+                    this.$store.dispatch("select_item",this.items[i]._id)
                 //     let promise = new Promise((resolve, reject) => {
                 //         console.log("promise launch");
                 //         resolve(this.$store.dispatch("select_item",this.items[i]._id));
@@ -76,11 +79,13 @@ export default {
             // console.log(value)
         },
     },
-    // mounted() {
-    //     let items = this.$store.getters.getAllItems
-    //     console.log(items);
-    //     return {items}
-    // },
+    async mounted() {
+        await this.$store.dispatch("getAllItems");
+        await this.$store.dispatch("getAllRessources");
+        // this.$store.commit("clearUpdateRessource")
+        this.items = this.$store.getters.getAllItems
+        return this.items
+    },
     // computed(){
 
     //     this.select_item=this.$store.state.selected_item.then(console.log("changed"))
@@ -187,9 +192,6 @@ export default {
 .minMax>span{
     padding: 2px
 }
-
-
-
 
 
 
