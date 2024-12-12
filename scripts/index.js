@@ -27,7 +27,7 @@ const fetchData = async () => {
   const total = 21000;
   const step = 20;
   const timeOut = 1000;
-  for (let index = 1200; index < total; index += step) {
+  for (let index = 0; index < total; index += step) {
     await get_data(index, step);
     console.log(`still ${total - index} items to fetch`);
     console.log(`Total :(${(index / total) * 100}/100 %)`);
